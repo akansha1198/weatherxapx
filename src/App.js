@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch} from "react-redux";
+//action
+import{ fetchWeather} from "./actions/fetchWeather";
 
 function App() {
+
+const [city, setCity]= useState("");
+
+const weatherSelector = useSelector((state)=> state.WeatherInfo);
+const dispatch =  useDispatch();
+const getWeatherInfo =(city) => dispatch(fetchWeather(city));
+
+
+const getWeatherInfo =(e) => {
+  e.preventDefault();
+  console.log("Your Search");
+  console.log(city);
+  console.log(weatherSelector.weatherinfo)
+}
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+  <div className="App">
+    <header>
+      <h>React Redux WeatherApp (Powered by Hooks)</h>
+    </header>
+  </div>
+    <main>
+      <form onSubmit={getWeatherInfo}>
+     <div className="control">
+       <input type="text" name="name" placeholder="City" onChange={e => setCity(e.target.value)}/> 
+       </div>
+     <input type="Submit" value="Check Weather"/>
+  </form>
+  
+   </main>
+   </React.Fragment>
   );
 }
 
 export default App;
+
