@@ -1,0 +1,11 @@
+.alignment{
+    float:left;
+}
+
+.bgColor{
+    background-color: aliceblue;
+}
+
+.title-align{
+    display: flex;
+}
